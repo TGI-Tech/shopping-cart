@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     git branch: 'projet', 
-                        credentialsId: 'Git-hub-credential', 
+                        credentialsId: 'git', 
                         url: 'https://github.com/TGI-Tech/shopping-cart.git'
                 }
             }
