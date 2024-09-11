@@ -17,7 +17,7 @@ pipeline {
                 }
             }
         }
-        stage('Sonar Scan') {
+        stage('Sonar Scans') {
             steps {
                 script {
                     withSonarQubeEnv('sonar') {
