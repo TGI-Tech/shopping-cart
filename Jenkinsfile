@@ -1,8 +1,8 @@
 pipeline {
     agent any
 
-    tools {
-        sonarQubeScanner 'sonar'
+    environment {
+        PATH = "${env.PATH}:/path/to/sonar-scanner/bin"
     }
 
     stages {
