@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        sonarQubeScanner 'sonar'
+    }
+
     stages {
         stage('Clean Workspace') {
             steps {
@@ -17,7 +21,7 @@ pipeline {
                 }
             }
         }
-        stage('Sonar Scans') {
+        stage('Sonar Scan') {
             steps {
                 script {
                     withSonarQubeEnv('sonar') {
@@ -28,4 +32,3 @@ pipeline {
         }
     }
 }
-
