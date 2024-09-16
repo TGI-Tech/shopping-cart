@@ -21,6 +21,18 @@ pipeline {
                         credentialsId: 'git', 
                         url: 'https://github.com/TGI-Tech/shopping-cart.git'
                 }
+                }
+        }
+        stage('Build Sonar Scanner CLI') {
+            steps {
+                script {
+                    // Run SonarQube scan using the configured environment
+                    Dir('${WORKSPACE}/sonar') {
+                        // SonarQube scanner will use sonar-project.properties in the project root
+                        sh "docker build -t tgitech/sonarcli:v1 ."
+                    }
+                }
+            }
             }
         }
         stage('Sonar Scan') {
@@ -28,11 +40,7 @@ pipeline {
                 script {
                     // Run SonarQube scan using the configured environment
                     withSonarQubeEnv('sonar') {
-                        // SonarQube scanner will use sonar-project.properties in the project root
+                        docker.image('tgitech/sonarcli:v1').inside{
                         sh "sonar-scanner"
                     }
                 }
-            }
-        }
-    }
-}
