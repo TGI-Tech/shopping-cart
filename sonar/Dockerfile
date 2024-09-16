@@ -2,7 +2,7 @@
 FROM openjdk:11-slim
 
 # Set environment variables for SonarScanner version and download URL
-ENV SONAR_SCANNER_VERSION=5.0.1.3006
+ENV SONAR_SCANNER_VERSION=6.1.0.4477
 ENV SONAR_SCANNER_URL=https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONAR_SCANNER_VERSION}-linux.zip
 
 # Install required tools (curl, unzip)
