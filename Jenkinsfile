@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        SONAR_HOST_URL = 'http://34.207.188.153:9000'
+    }
+
     stages {
         stage('Clean Workspace') {
             steps {
@@ -33,7 +37,7 @@ pipeline {
                 script {
                     // Run SonarQube scan using the configured environment
                     withSonarQubeEnv('sonar') {
-                        sh "docker run --rm tgitech/sonarcli:${BUILD_NUMBER} sonar-scanner"
+                        sh "docker run --rm -e SONAR_HOST_URL=${SONAR_HOST_URL} tgitech/sonarcli:${BUILD_NUMBER} sonar-scanner"
                     }
                 }
             }
