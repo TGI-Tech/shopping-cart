@@ -14,16 +14,13 @@ RUN apt-get update && \
 RUN curl -SL "$SONAR_SCANNER_URL" -o sonar-scanner-cli.zip && \
     unzip sonar-scanner-cli.zip -d /opt && \
     rm sonar-scanner-cli.zip && \
-    ln -s /opt/sonar-scanner-${SONAR_SCANNER_VERSION}-linux/bin/sonar-scanner /usr/local/bin/sonar-scanner
+    ln -s /opt/sonar-scanner-${SONAR_SCANNER_VERSION}-linux/bin/sonar-scanner /usr/local/bin/sonar-scanner || { echo 'Download failed'; exit 1; }
 
 # Set up PATH environment variable to include Sonar Scanner
 ENV PATH="${PATH}:/opt/sonar-scanner-${SONAR_SCANNER_VERSION}-linux/bin"
 
 # Print Sonar Scanner version for verification
-RUN sonar-scanner -v
+RUN sonar-scanner -v || { echo 'Sonar Scanner not found'; exit 1; }
 
 # Define a work directory
 WORKDIR /app
-
-
-# https://chat.openai.com/c/8e7c24da-0fff-4e07-b834-79535b5e80e3

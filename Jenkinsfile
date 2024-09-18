@@ -1,7 +1,6 @@
 pipeline {
     agent any
 
-
     stages {
         stage('Clean Workspace') {
             steps {
@@ -22,9 +21,8 @@ pipeline {
         stage('Build Sonar Scanner CLI') {
             steps {
                 script {
-                    // Run SonarQube scan using the configured environment
+                    // Run Docker build
                     dir("${WORKSPACE}/sonar") {
-                        // SonarQube scanner will use sonar-project.properties in the project root
                         sh "docker build -t tgitech/sonarcli:v1 ."
                     }
                 }
