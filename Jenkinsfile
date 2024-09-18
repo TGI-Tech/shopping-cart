@@ -23,7 +23,7 @@ pipeline {
                 script {
                     // Run Docker build
                     dir("${WORKSPACE}/sonar") {
-                        sh "docker build -t tgitech/sonarcli:v1 ."
+                        sh "docker build -t tgitech/sonarcli:${BUILD_NUMBER} ."
                     }
                 }
             }
