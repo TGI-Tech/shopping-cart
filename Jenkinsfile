@@ -33,9 +33,7 @@ pipeline {
                 script {
                     // Run SonarQube scan using the configured environment
                     withSonarQubeEnv('sonar') {
-                        docker.image('tgitech/sonarcli:${BUILD_NUMBER}').inside {
-                            sh "sonar-scanner"
-                        }
+                        sh "docker run --rm tgitech/sonarcli:${BUILD_NUMBER} sonar-scanner"
                     }
                 }
             }
